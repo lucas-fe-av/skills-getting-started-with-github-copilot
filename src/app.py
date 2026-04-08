@@ -20,7 +20,9 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
 # In-memory activity database
-activities = {
+def get_default_activities():
+    """Returns the default activities for the system"""
+    return {
     "Chess Club": {
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
@@ -75,7 +77,11 @@ activities = {
         "max_participants": 22,
         "participants": ["jordan@mergington.edu"]
     }
-}
+    }
+
+
+# Module-level activities instance (for the running app)
+activities = get_default_activities()
 
 
 @app.get("/")
